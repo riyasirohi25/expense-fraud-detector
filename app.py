@@ -16,6 +16,9 @@ def load_data():
     df = pd.read_sql_query(query, conn)
     conn.close()
     return df
+@app.route('/')
+def home():
+    return "Expense Fraud Detector API is running. Use /predict with POST."
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
