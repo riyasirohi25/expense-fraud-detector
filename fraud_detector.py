@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+import joblib
 def load_data():
 	conn=sqlite3.connect('data/expenses.db')
 	query="SELECT Amount, date, description, is_fraud FROM expenses"
@@ -36,3 +37,7 @@ if __name__=="__main__":
 	X,Y=prepare_data(df)
 	#train and evaluate model
 	model=train_model(X,Y)
+	#save the model to a file
+	joblib.dump(model,'fraud_detector.pkl')
+	print("model saved as fraud_detector.pkl")
+
